@@ -1,0 +1,10 @@
+# Netlify her yayında blog sayfalarını yeniden üretir.
+[build]
+  command = "python3 blog/blog_build.py --site site"
+  publish = "site"
+
+[[headers]]
+  for = "/yonetim/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-cache"

@@ -1,0 +1,83 @@
+backend:
+  name: github
+  repo: sahinkaradas/sahinkaradas.com-web-sitesi
+  branch: main
+  commit_messages:
+    create: "Blog yazısı eklendi: {{slug}}"
+    update: "Blog yazısı güncellendi: {{slug}}"
+    delete: "Blog yazısı silindi: {{slug}}"
+    uploadMedia: "Görsel yüklendi: {{path}}"
+    deleteMedia: "Görsel silindi: {{path}}"
+
+locale: tr
+site_url: https://sahinkaradas.com
+display_url: https://sahinkaradas.com
+logo_url: https://sahinkaradas.com/apple-touch-icon.png
+media_folder: site/assets/img
+public_folder: /assets/img
+slug:
+  encoding: ascii
+  clean_accents: true
+
+collections:
+  - name: blog
+    label: Blog yazıları
+    label_singular: Blog yazısı
+    description: "Benim hazırladığım taslağı alan alan yapıştırın, sonra Yayınla'ya basın. 1-2 dakika içinde sitede görünür."
+    folder: blog/posts
+    create: true
+    delete: true
+    format: json
+    extension: json
+    slug: "{{fields.adres}}"
+    identifier_field: title
+    summary: "{{date}} · {{title}}"
+    sortable_fields: ["date", "title"]
+    preview_path: "blog/{{fields.adres}}/"
+    fields:
+      - label: Başlık
+        name: title
+        widget: string
+        hint: "Yazının büyük başlığı."
+      - label: Adres
+        name: adres
+        widget: string
+        pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', "Sadece küçük harf, rakam ve tire. Türkçe karakter ve boşluk yok."]
+        hint: "Yazının bağlantısı olur: sahinkaradas.com/blog/ADRES/ (ör. instagram-reklam-ucretleri). Yayınladıktan sonra değiştirmeyin."
+      - label: Yayın tarihi
+        name: date
+        widget: datetime
+        format: "YYYY-MM-DD"
+        date_format: "DD.MM.YYYY"
+        time_format: false
+        default: "{{now}}"
+      - label: Kategori
+        name: category
+        widget: select
+        options: ["Mesaj otomasyonu", "Meta reklamları", "Randevu ve satış", "İşletme ipuçları"]
+        default: "Mesaj otomasyonu"
+      - label: Google başlığı
+        name: seo_title
+        widget: string
+        required: false
+        hint: "Google sonuçlarında görünen başlık. En fazla 62 karakter. Boş bırakırsanız Başlık kullanılır."
+      - label: Kısa açıklama
+        name: description
+        widget: text
+        hint: "Google'da ve blog listesinde görünür. 110-165 karakter."
+      - label: Giriş
+        name: lead
+        widget: text
+        hint: "Başlığın altındaki 1-2 cümle."
+      - label: Anahtar kelimeler
+        name: keywords
+        widget: list
+        required: false
+        hint: "Virgülle ayırın."
+      - label: Yazı
+        name: body
+        widget: markdown
+        modes: ["raw", "rich_text"]
+        buttons: ["bold", "italic", "link", "heading-two", "heading-three", "quote", "bulleted-list", "numbered-list"]
+        editor_components: ["image"]
+        hint: "Taslaktaki yazı metnini olduğu gibi buraya yapıştırın."
