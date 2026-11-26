@@ -153,6 +153,11 @@ def md(src):
             while i < len(lines) and lines[i].strip() and (lines[i].strip().startswith(">") or q):
                 q.append(re.sub(r"^\s*>\s?", "", lines[i])); i += 1
             out.append('<div class="note">' + md("\n".join(q)) + "</div>"); continue
+        if s.startswith("|") and i + 1 < len(lines) and re.match(r"^\s*\|?\s*:?-{3,}", lines[i + 1]):
+            flush(); rows = []
+            while i < len(lines) and lines[i].strip().startswith("|"):
+                rows.append(lines[i].strip()); i += 1
+            out.append(_table(rows)); continue
         if _li_re(ln) and (not para or not _li_re(ln).group(2)[0].isdigit() or _li_re(ln).group(2)[0] == "1"):
             flush()
             html_list, i = _list(lines, i)
@@ -160,6 +165,28 @@ def md(src):
         para.append(ln.lstrip()); i += 1
     flush()
     return "\n".join(out)
+
+
+def _table(rows):
+    """| a | b | satırlarından tablo (ilk satır başlık, ikinci satır --- ayırıcı)."""
+    def cells(r):
+        r = r.strip()
+        if r.startswith("|"):
+            r = r[1:]
+        if r.endswith("|") and not r.endswith("\\|"):
+            r = r[:-1]
+        return [c.strip() for c in re.split(r"(?<!\\)\|", r)]
+    head, body = cells(rows[0]), [cells(r) for r in rows[2:]]
+
+    def cell(c):   # "md. 5/2-c" gibi madde numaraları satır sonunda bölünmesin
+        return re.sub(r"\b(md\.|Art\.) (\d+(?:/\d+)?(?:-[a-zçğ])?)", r'<span class="nw">\1 \2</span>', inline(c))
+    # telefonda her satır bir kart olur; roller, görünüm değişse de tablo olarak okunsun diye
+    lbl = [html.escape(re.sub(r"<[^>]+>", "", inline(c)), quote=True) for c in head]
+    th = "".join(f'<th role="columnheader" scope="col">{inline(c)}</th>' for c in head)
+    trs = "".join('<tr role="row">' + "".join(f'<td role="cell" data-label="{lbl[k]}">{cell(c)}</td>' for k, c in enumerate(r)) + "</tr>" for r in body)
+    kind = "tbl-w" if len(head) > 3 else "tbl-s"
+    return (f'<div class="tbl {kind}"><table role="table"><thead role="rowgroup"><tr role="row">{th}</tr></thead>'
+            f'<tbody role="rowgroup">{trs}</tbody></table></div>')
 
 
 def _list(lines, i):
@@ -271,18 +298,42 @@ class Paths:
     def asset(self, name):
         return "/" + name if self.kind == "site" else self.up() + name
 
+    def page(self, path):
+        """Yasal sayfalar gibi kök altındaki sayfalar (ör. 'kvkk/', 'en/privacy/')."""
+        return "/" + path if self.kind == "site" else self.up() + path + "index.html"
 
-def head(shell, P, title, desc, url, extra, ld):
+    def root(self):
+        return "/" if self.kind == "site" else self.up()
+
+
+_PAGE = re.compile(r"@@PAGE:([a-z0-9/-]+)@@")
+
+
+def pages(text, P):
+    return _PAGE.sub(lambda m: P.page(m.group(1)), text)
+
+
+def consent(P):
+    """Çerez tercihi + Meta Pikseli (izin verilmeden piksel yüklenmez)."""
+    return f'<script src="{P.asset("assets/cerez.js")}" data-root="{P.root()}" data-kind="{P.kind}" defer></script>'
+
+
+def foot(shell, P):
+    return pages(shell["footer"], P) + "\n" + consent(P)
+
+
+def head(shell, P, title, desc, url, extra, ld, lang="tr"):
     icon = P.asset("apple-touch-icon.png")
+    battr = ' data-lang="en"' if lang == "en" else ""
     return f"""<!doctype html>
-<html lang="tr">
+<html lang="{lang}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>{e(title)}</title>
 <meta name="description" content="{e(desc)}">
 <link rel="canonical" href="{url}">
-<meta property="og:locale" content="tr_TR">
+<meta property="og:locale" content="{'en_US' if lang == 'en' else 'tr_TR'}">
 <meta property="og:site_name" content="Şahin Karadaş">
 <meta property="og:url" content="{url}">
 <meta property="og:description" content="{e(desc)}">
@@ -294,7 +345,7 @@ def head(shell, P, title, desc, url, extra, ld):
 <link rel="stylesheet" href="{P.asset(shell['css'])}">
 <script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>
 </head>
-<body>
+<body{battr}>
 """
 
 
@@ -354,7 +405,7 @@ def post_page(shell, posts, p, kind):
 </article>
 </div>
 </main>
-{shell['footer']}
+{foot(shell, P)}
 {JS}
 </body>
 </html>
@@ -393,11 +444,84 @@ def list_page(shell, posts, kind):
 </div>
 </div>
 </main>
-{shell['footer']}
+{foot(shell, P)}
 {JS}
 </body>
 </html>
 """)
+
+
+# ---------- yasal sayfalar: yasal/*.md (KVKK, çerez politikası, açık rıza; Türkçe + İngilizce) ----------
+MONTHS_EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+
+
+def load_legal():
+    folder = os.path.join(HERE, "yasal")
+    if not os.path.isdir(folder):
+        return []
+    out = []
+    for f in sorted(os.listdir(folder)):
+        if not f.endswith(".md"):
+            continue
+        src = open(os.path.join(folder, f), encoding="utf-8").read().replace("\r\n", "\n")
+        m = re.match(r"^---\n(.*?)\n---\n(.*)$", src, re.S)
+        if not m:
+            sys.exit(f"yasal/{f}: üstteki --- bilgi bölümü eksik")
+        meta = {}
+        for ln in m.group(1).split("\n"):
+            if ":" in ln:
+                k, v = ln.split(":", 1)
+                meta[k.strip()] = v.strip()
+        miss = [k for k in ("title", "h1", "description", "lang", "path", "alt", "updated") if not meta.get(k)]
+        if miss:
+            sys.exit(f"yasal/{f}: eksik alan {miss}")
+        dt.date.fromisoformat(meta["updated"])
+        meta["body"] = md(m.group(2))
+        out.append(meta)
+    return out
+
+
+def legal_page(shell, L, kind):
+    P = Paths(kind, L["path"].strip("/").count("/") + 1)
+    en = L["lang"] == "en"
+    url = shell["site"] + "/" + L["path"]
+    alt_lang = "tr" if en else "en"
+    d = dt.date.fromisoformat(L["updated"])
+    if en:
+        upd, home, alt_txt, crumbs = f"Last updated: {d.day} {MONTHS_EN[d.month - 1]} {d.year}", "Home", "Türkçe metin", "Breadcrumb"
+    else:
+        upd, home, alt_txt, crumbs = f"Son güncelleme: {tarih(L['updated'])}", "Ana sayfa", "English version", "Sayfa yolu"
+    extra = (f'<meta property="og:type" content="website">\n<meta property="og:title" content="{e(L["title"])} | Şahin Karadaş">\n'
+             f'<link rel="alternate" hreflang="{L["lang"]}" href="{url}">\n'
+             f'<link rel="alternate" hreflang="{alt_lang}" href="{shell["site"]}/{L["alt"]}">')
+    ld = {"@context": "https://schema.org", "@type": "WebPage", "name": L["h1"], "url": url,
+          "inLanguage": "en" if en else "tr-TR", "dateModified": L["updated"]}
+    hdr = shell["header"].replace("@@HOME@@", P.home()).replace("@@BLOG@@", P.blog()).replace(" @@CUR@@", "").replace("@@CUR@@", "")
+    page = (head(shell, P, f"{L['title']} | Şahin Karadaş", L["description"], url, extra, ld, L["lang"]) + hdr + f"""
+<main id="icerik" class="b-main">
+<div class="wrap">
+<article class="post legal">
+<nav class="crumbs" aria-label="{crumbs}"><ol><li><a href="{P.home()}">{home}</a></li></ol></nav>
+<header class="post-hd">
+<h1 class="post-h1">{L['h1']}</h1>
+<p class="post-meta"><span>{upd}</span><span class="dot" aria-hidden="true"></span><a href="{P.page(L['alt'])}" hreflang="{alt_lang}">{alt_txt}</a></p>
+</header>
+<div class="prose">
+{pages(L['body'], P)}
+</div>
+</article>
+</div>
+</main>
+{foot(shell, P)}
+{JS}
+</body>
+</html>
+""")
+    if en:   # İngilizce sayfada ekran okuyucu etiketleri de İngilizce olsun
+        page = re.sub(r'aria-label="[^"]*" data-aria-tr="[^"]*" data-aria-en="([^"]*)"', r'aria-label="\1"', page)
+        for a, b in (("Şahin Karadaş, ana sayfa", "Şahin Karadaş, home"), ("Ana menü", "Main menu"), ("Mobil menü", "Mobile menu")):
+            page = page.replace(f'aria-label="{a}"', f'aria-label="{b}"')
+    return page
 
 
 def write(path, text):
@@ -411,6 +535,8 @@ def build(shell, posts, out, kind):
     write(os.path.join(out, "blog", "index.html"), list_page(shell, posts, kind))
     for p in posts:
         write(os.path.join(out, "blog", p["slug"], "index.html"), post_page(shell, posts, p, kind))
+    for L in load_legal():
+        write(os.path.join(out, L["path"], "index.html"), legal_page(shell, L, kind))
     if kind == "site":
         today = dt.date.today().isoformat()
         last = max([p.get("updated") or p["date"] for p in posts] or [today])

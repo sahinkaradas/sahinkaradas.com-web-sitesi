@@ -402,6 +402,57 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
 /* fiyat notu */
 .pk .vat{margin-top:4px;font-size:13.5px;font-weight:600;color:var(--muted)}
 
+/* ---------- KVKK: alt bilgi bağlantıları ---------- */
+.ft-legal{display:flex;flex-wrap:wrap;align-items:center;gap:0 24px;margin-top:4px;font-size:15px}
+.ft-legal a,.ft-ck{display:inline-flex;align-items:center;min-height:44px;padding:0;border:0;background:none;color:var(--muted);font:inherit;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.ft-legal a:hover,.ft-ck:hover{color:var(--ink)}
+/* ---------- çerez bildirimi ---------- */
+.ck{position:fixed;z-index:80;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(460px,calc(100% - 32px));display:grid;gap:10px;padding:20px 20px 18px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--card);color:var(--ink);box-shadow:0 22px 48px -20px rgba(21,20,18,.45);font-family:var(--f)}
+.ck h2{font-size:17px;line-height:1.3;font-weight:800;letter-spacing:-.01em}
+.ck p{font-size:14.5px;line-height:1.55;color:var(--muted)}
+.ck .ck-links{display:flex;flex-wrap:wrap;gap:0 18px}
+.ck-links a,.ck-opt a{color:var(--ink);font-weight:600;text-underline-offset:3px}
+.ck-links a{display:inline-flex;align-items:center;min-height:36px}
+.ck-row,.ckd-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ck-b{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 10px;border-radius:999px;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);font:700 15px/1.2 var(--f);text-align:center;cursor:pointer}
+.ck-b.ol{background:transparent;color:var(--ink)}
+.ck-b:hover{opacity:.86}
+.ck-b.ol:hover{opacity:1;background:var(--blush)}
+html.ck-on .mbar,html.ck-on .fab{visibility:hidden}
+@media (min-width:900px){.ck{left:0;right:0;bottom:0;width:auto;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"h l b" "p p b";align-items:center;gap:0 20px;padding:12px max(24px,calc((100% - 1160px) / 2 + 20px)) calc(14px + env(safe-area-inset-bottom,0px));border-width:1px 0 0;border-radius:0;box-shadow:0 -14px 36px -22px rgba(21,20,18,.4)}.ck h2{grid-area:h}.ck .ck-links{grid-area:l}.ck > p:first-of-type{grid-area:p;max-width:780px}.ck .ck-row{grid-area:b;grid-template-columns:repeat(3,128px);margin-left:24px}}
+@media (max-width:620px){.ck{left:0;right:0;bottom:0;width:auto;padding:18px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));border-width:1px 0 0;border-radius:var(--r-m) var(--r-m) 0 0}}
+/* ---------- çerez ayarları paneli ---------- */
+.ckd{width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 24px);margin:auto;padding:0;border:1px solid var(--line);border-radius:var(--r-l);background:var(--card);color:var(--ink);font-family:var(--f);box-shadow:0 30px 60px -24px rgba(21,20,18,.55);overflow:auto}
+.ckd::backdrop{background:rgba(21,20,18,.55)}
+.ckd-in{display:grid;gap:14px;padding:clamp(20px,4vw,28px)}
+.ckd-hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ckd h2{font-size:21px;line-height:1.25;font-weight:800;letter-spacing:-.015em}
+.ckd p{font-size:15px;line-height:1.6;color:var(--muted)}
+.ckd-x{flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin:-6px -6px -6px 0;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.ckd-x:hover{background:var(--blush)}
+.ck-opt{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 16px;padding:16px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--blush)}
+.ck-opt h3{font-size:16px;line-height:1.3;font-weight:800;letter-spacing:-.01em}
+.ck-opt h3 label{cursor:pointer}
+.ck-opt p{grid-column:1/-1;font-size:14.5px}
+.ck-always{font-size:13.5px;font-weight:700;color:var(--muted)}
+.ck-sw{appearance:none;-webkit-appearance:none;position:relative;flex:none;width:52px;height:30px;margin:0;border-radius:999px;background:var(--card);box-shadow:inset 0 0 0 2px var(--muted);cursor:pointer;transition:background-color .15s ease}
+.ck-sw::after{content:"";position:absolute;top:5px;left:5px;width:20px;height:20px;border-radius:50%;background:var(--muted);transition:transform .15s ease,background-color .15s ease}
+.ck-sw:checked{background:var(--wa);box-shadow:none}
+.ck-sw:checked::after{transform:translateX(22px);background:#fff}
+.ckd-row{margin-top:4px}
+@media (max-width:560px){.ckd-row{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.ck-sw,.ck-sw::after{transition:none}}
+/* ---------- yasal sayfalar ---------- */
+.prose .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-s)}
+.prose table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.55}
+.prose th,.prose td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.prose th{background:var(--blush);font-size:15px;font-weight:800}
+.prose tbody tr:last-child td{border-bottom:0}
+.post-meta a{color:var(--ink);text-underline-offset:3px}
+@media (max-width:620px){.prose table{font-size:15px}.prose th,.prose td{padding:10px 12px}}
+@media (max-width:620px){.prose .tbl{overflow:visible;border:0;border-radius:0}.prose .tbl table,.prose .tbl tbody{display:block}.prose .tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.prose .tbl tr{display:block;padding:8px 0;border:1px solid var(--line);border-radius:var(--r-s)}.prose .tbl tr + tr{margin-top:10px}.prose .tbl td{padding:6px 14px;border:0}.prose .tbl td::before{content:attr(data-label);font-weight:700;color:var(--muted)}.prose .tbl-w td{display:grid;grid-template-columns:7.2em minmax(0,1fr);gap:12px}.prose .tbl-w td:first-child{font-weight:700}.prose .tbl-s td{display:block}.prose .tbl-s td::before{display:block;margin-bottom:2px;font-size:13.5px}.prose .tbl-s td:first-child{font-weight:600}}
+.prose .nw,.prose .tbl-w td:first-child{white-space:nowrap}
+
 .hdr .hdr-in{max-width:1320px}
 .nav,.hdr-r{flex-shrink:0}
 .nav{gap:0}.nav a{padding:0 8px}

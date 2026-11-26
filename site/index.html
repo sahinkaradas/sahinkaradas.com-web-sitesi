@@ -415,6 +415,57 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
 /* fiyat notu */
 .pk .vat{margin-top:4px;font-size:13.5px;font-weight:600;color:var(--muted)}
 
+/* ---------- KVKK: alt bilgi bağlantıları ---------- */
+.ft-legal{display:flex;flex-wrap:wrap;align-items:center;gap:0 24px;margin-top:4px;font-size:15px}
+.ft-legal a,.ft-ck{display:inline-flex;align-items:center;min-height:44px;padding:0;border:0;background:none;color:var(--muted);font:inherit;text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.ft-legal a:hover,.ft-ck:hover{color:var(--ink)}
+/* ---------- çerez bildirimi ---------- */
+.ck{position:fixed;z-index:80;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));width:min(460px,calc(100% - 32px));display:grid;gap:10px;padding:20px 20px 18px;border:1px solid var(--line);border-radius:var(--r-m);background:var(--card);color:var(--ink);box-shadow:0 22px 48px -20px rgba(21,20,18,.45);font-family:var(--f)}
+.ck h2{font-size:17px;line-height:1.3;font-weight:800;letter-spacing:-.01em}
+.ck p{font-size:14.5px;line-height:1.55;color:var(--muted)}
+.ck .ck-links{display:flex;flex-wrap:wrap;gap:0 18px}
+.ck-links a,.ck-opt a{color:var(--ink);font-weight:600;text-underline-offset:3px}
+.ck-links a{display:inline-flex;align-items:center;min-height:36px}
+.ck-row,.ckd-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ck-b{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:0 10px;border-radius:999px;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);font:700 15px/1.2 var(--f);text-align:center;cursor:pointer}
+.ck-b.ol{background:transparent;color:var(--ink)}
+.ck-b:hover{opacity:.86}
+.ck-b.ol:hover{opacity:1;background:var(--blush)}
+html.ck-on .mbar,html.ck-on .fab{visibility:hidden}
+@media (min-width:900px){.ck{left:0;right:0;bottom:0;width:auto;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"h l b" "p p b";align-items:center;gap:0 20px;padding:12px max(24px,calc((100% - 1160px) / 2 + 20px)) calc(14px + env(safe-area-inset-bottom,0px));border-width:1px 0 0;border-radius:0;box-shadow:0 -14px 36px -22px rgba(21,20,18,.4)}.ck h2{grid-area:h}.ck .ck-links{grid-area:l}.ck > p:first-of-type{grid-area:p;max-width:780px}.ck .ck-row{grid-area:b;grid-template-columns:repeat(3,128px);margin-left:24px}}
+@media (max-width:620px){.ck{left:0;right:0;bottom:0;width:auto;padding:18px max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));border-width:1px 0 0;border-radius:var(--r-m) var(--r-m) 0 0}}
+/* ---------- çerez ayarları paneli ---------- */
+.ckd{width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 24px);margin:auto;padding:0;border:1px solid var(--line);border-radius:var(--r-l);background:var(--card);color:var(--ink);font-family:var(--f);box-shadow:0 30px 60px -24px rgba(21,20,18,.55);overflow:auto}
+.ckd::backdrop{background:rgba(21,20,18,.55)}
+.ckd-in{display:grid;gap:14px;padding:clamp(20px,4vw,28px)}
+.ckd-hd{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.ckd h2{font-size:21px;line-height:1.25;font-weight:800;letter-spacing:-.015em}
+.ckd p{font-size:15px;line-height:1.6;color:var(--muted)}
+.ckd-x{flex:none;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin:-6px -6px -6px 0;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.ckd-x:hover{background:var(--blush)}
+.ck-opt{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 16px;padding:16px;border:1px solid var(--line);border-radius:var(--r-s);background:var(--blush)}
+.ck-opt h3{font-size:16px;line-height:1.3;font-weight:800;letter-spacing:-.01em}
+.ck-opt h3 label{cursor:pointer}
+.ck-opt p{grid-column:1/-1;font-size:14.5px}
+.ck-always{font-size:13.5px;font-weight:700;color:var(--muted)}
+.ck-sw{appearance:none;-webkit-appearance:none;position:relative;flex:none;width:52px;height:30px;margin:0;border-radius:999px;background:var(--card);box-shadow:inset 0 0 0 2px var(--muted);cursor:pointer;transition:background-color .15s ease}
+.ck-sw::after{content:"";position:absolute;top:5px;left:5px;width:20px;height:20px;border-radius:50%;background:var(--muted);transition:transform .15s ease,background-color .15s ease}
+.ck-sw:checked{background:var(--wa);box-shadow:none}
+.ck-sw:checked::after{transform:translateX(22px);background:#fff}
+.ckd-row{margin-top:4px}
+@media (max-width:560px){.ckd-row{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.ck-sw,.ck-sw::after{transition:none}}
+/* ---------- yasal sayfalar ---------- */
+.prose .tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-s)}
+.prose table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.55}
+.prose th,.prose td{padding:11px 14px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+.prose th{background:var(--blush);font-size:15px;font-weight:800}
+.prose tbody tr:last-child td{border-bottom:0}
+.post-meta a{color:var(--ink);text-underline-offset:3px}
+@media (max-width:620px){.prose table{font-size:15px}.prose th,.prose td{padding:10px 12px}}
+@media (max-width:620px){.prose .tbl{overflow:visible;border:0;border-radius:0}.prose .tbl table,.prose .tbl tbody{display:block}.prose .tbl thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.prose .tbl tr{display:block;padding:8px 0;border:1px solid var(--line);border-radius:var(--r-s)}.prose .tbl tr + tr{margin-top:10px}.prose .tbl td{padding:6px 14px;border:0}.prose .tbl td::before{content:attr(data-label);font-weight:700;color:var(--muted)}.prose .tbl-w td{display:grid;grid-template-columns:7.2em minmax(0,1fr);gap:12px}.prose .tbl-w td:first-child{font-weight:700}.prose .tbl-s td{display:block}.prose .tbl-s td::before{display:block;margin-bottom:2px;font-size:13.5px}.prose .tbl-s td:first-child{font-weight:600}}
+.prose .nw,.prose .tbl-w td:first-child{white-space:nowrap}
+
 .hdr .hdr-in{max-width:1320px}
 .nav,.hdr-r{flex-shrink:0}
 .nav{gap:0}.nav a{padding:0 8px}
@@ -494,39 +545,11 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
     </figure>
   </div>
 </section>
-<section class="band" id="dertler" aria-labelledby="h-dert">
-  <div class="wrap">
-    <div class="head">
-      <p><span class="eye"><span lang="tr">Tanıdık gelebilir</span><span lang="en">Sound familiar?</span></span></p>
-      <h2 class="h2" id="h-dert"><span lang="tr">Kadın kuaförleri ve güzellik merkezleri için çözdüğüm problemlerden başlıca <span style="color:var(--plum-ink)">3'ü:</span></span><span lang="en">The <span style="color:var(--plum-ink)">3 main problems</span> I solve for women's hair salons and beauty centres:</span></h2>
-    </div>
-    <div class="cards3">
-      <article class="pcard">
-        <span class="ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M12.5 8v4l2.5 1.5"/></svg></span>
-        <h3><span lang="tr">Elinizde fırça varken mesaj bekliyor</span><span lang="en">Messages wait while you hold the brush</span></h3>
-        <p><span lang="tr">“Keratin ne kadar?” mesajına 2 saat sonra dönüyorsunuz. Müşteri o arada başka salondan randevusunu almış oluyor.</span><span lang="en">You reply to “How much is keratin?” two hours later. By then the client has already booked at another salon.</span></p>
-        <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Asistan 1 dakika içinde fiyatı ve boş saatleri yazar.</span><span lang="en">The assistant sends the price and free slots within 1 minute.</span></span></div>
-      </article>
-      <article class="pcard">
-        <span class="ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></span>
-        <h3><span lang="tr">Mesai dışında gelen mesaj cevapsız kalıyor</span><span lang="en">Messages after hours go unanswered</span></h3>
-        <p><span lang="tr">Birçok müşteri mesajını salon kapandıktan sonra, pazar günü ya da bayramda atıyor. Ertesi sabah telefonu açtığınızda o müşteri çoktan başka bir salondan randevusunu almış oluyor.</span><span lang="en">Many clients write after the salon has closed, on a Sunday or on a public holiday. By the time you check your phone the next morning, she has already booked at another salon.</span></p>
-        <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Asistan mesai dışında da 1 dakikada cevap verir, randevuyu ertesi güne hazır bırakır.</span><span lang="en">The assistant replies within a minute after hours too and leaves the booking ready for the next day.</span></span></div>
-      </article>
-      <article class="pcard">
-        <span class="ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M10 13.5l4 4M14 13.5l-4 4"/></svg></span>
-        <h3><span lang="tr">Unutulan randevu, boş koltuk</span><span lang="en">A forgotten booking, an empty chair</span></h3>
-        <p><span lang="tr">Protez tırnak, kirpik lifting, gelin başı… Randevusunu unutan müşteri gelmiyor, o saat boş geçiyor.</span><span lang="en">Acrylic nails, lash lift, bridal hair… A client who forgets her appointment doesn't come, and that hour goes empty.</span></p>
-        <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Randevu sabahı hatırlatma gider, gelemeyecekse önceden haber verir.</span><span lang="en">A reminder goes out on the morning of the visit; if she can't come, she lets you know in advance.</span></span></div>
-      </article>
-    </div>
-  </div>
-</section>
-<section class="band blush" id="hizmetler" aria-labelledby="h-hiz">
+<section class="band" id="hizmetler" aria-labelledby="h-hiz">
   <div class="wrap">
     <div class="head">
       <p><span class="eye"><span lang="tr">Hizmetler</span><span lang="en">Services</span></span></p>
-      <h2 class="h2" id="h-hiz"><span lang="tr">İki ayrı hizmet, tek hedef: dolu koltuk.</span><span lang="en">Two separate services, one goal: a full chair.</span></h2>
+      <h2 class="h2" id="h-hiz"><span lang="tr">Müşteriyi reklamla ben getiriyorum, asistan da kaçırmıyor.</span><span lang="en">I bring in clients with ads, and the assistant makes sure none slip away.</span></h2>
       <p class="lead"><span lang="tr">Reklam yönetimi yeni müşteriyi getirir. Mesaj asistanı o müşteriyi karşılar ve randevuya yönlendirir. İkisini ayrı ayrı da alabilirsiniz, birlikte de.</span><span lang="en">Ad management brings new clients. The message assistant welcomes them and guides them to a booking. You can take them separately or together.</span></p>
     </div>
     <ol class="pipe" aria-label="Müşterinin yolu" data-aria-tr="Müşterinin yolu" data-aria-en="The client's path">
@@ -562,6 +585,34 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
     <div style="margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px">
       <a class="btn btn-wa " href="https://wa.me/905458070768?text=Merhaba%20%C5%9Eahin%20Bey%2C%20salonuma%20hangi%20hizmetin%20uygun%20oldu%C4%9Funu%20konu%C5%9Fmak%20istiyorum." data-wa-tr="https://wa.me/905458070768?text=Merhaba%20%C5%9Eahin%20Bey%2C%20salonuma%20hangi%20hizmetin%20uygun%20oldu%C4%9Funu%20konu%C5%9Fmak%20istiyorum." data-wa-en="https://wa.me/905458070768?text=Hello%20%C5%9Eahin%2C%20I%27d%20like%20to%20talk%20about%20which%20service%20suits%20my%20salon." target="_blank" rel="noopener" ><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg><span><span lang="tr">Hangisi bana uygun? Sorun</span><span lang="en">Which one suits me? Ask</span></span></a>
       <span class="note"><span lang="tr">10 dakikalık ön görüşme, ücret yok.</span><span lang="en">10-minute intro call, free of charge.</span></span>
+    </div>
+  </div>
+</section>
+<section class="band blush" id="dertler" aria-labelledby="h-dert">
+  <div class="wrap">
+    <div class="head">
+      <p><span class="eye"><span lang="tr">Tanıdık gelebilir</span><span lang="en">Sound familiar?</span></span></p>
+      <h2 class="h2" id="h-dert"><span lang="tr">Kadın kuaförleri ve güzellik merkezleri için çözdüğüm problemlerden başlıca <span style="color:var(--plum-ink)">3'ü:</span></span><span lang="en">The <span style="color:var(--plum-ink)">3 main problems</span> I solve for women's hair salons and beauty centres:</span></h2>
+    </div>
+    <div class="cards3">
+      <article class="pcard">
+        <span class="ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M12.5 8v4l2.5 1.5"/></svg></span>
+        <h3><span lang="tr">Koltukta müşteri varken telefona bakamıyorsunuz</span><span lang="en">You can't check your phone while a client is in the chair</span></h3>
+        <p><span lang="tr">“Keratin ne kadar?” mesajına 2 saat sonra dönüyorsunuz. Müşteri o arada başka salondan randevusunu almış oluyor.</span><span lang="en">You reply to “How much is keratin?” two hours later. By then the client has already booked at another salon.</span></p>
+        <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Asistan 1 dakika içinde fiyatı ve boş saatleri yazar.</span><span lang="en">The assistant sends the price and free slots within 1 minute.</span></span></div>
+      </article>
+      <article class="pcard">
+        <span class="ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></span>
+        <h3><span lang="tr">Mesai dışında gelen mesaj cevapsız kalıyor</span><span lang="en">Messages after hours go unanswered</span></h3>
+        <p><span lang="tr">Birçok müşteri mesajını salon kapandıktan sonra, pazar günü ya da bayramda atıyor. Ertesi sabah telefonu açtığınızda o müşteri çoktan başka bir salondan randevusunu almış oluyor.</span><span lang="en">Many clients write after the salon has closed, on a Sunday or on a public holiday. By the time you check your phone the next morning, she has already booked at another salon.</span></p>
+        <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Asistan mesai dışında da 1 dakikada cevap verir, randevuyu ertesi güne hazır bırakır.</span><span lang="en">The assistant replies within a minute after hours too and leaves the booking ready for the next day.</span></span></div>
+      </article>
+      <article class="pcard">
+        <span class="ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M10 13.5l4 4M14 13.5l-4 4"/></svg></span>
+        <h3><span lang="tr">Unutulan randevu, boş koltuk</span><span lang="en">A forgotten booking, an empty chair</span></h3>
+        <p><span lang="tr">Protez tırnak, kirpik lifting, gelin başı… Randevusunu unutan müşteri gelmiyor, o saat boş geçiyor.</span><span lang="en">Acrylic nails, lash lift, bridal hair… A client who forgets her appointment doesn't come, and that hour goes empty.</span></p>
+        <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Randevu sabahı hatırlatma gider, gelemeyecekse önceden haber verir.</span><span lang="en">A reminder goes out on the morning of the visit; if she can't come, she lets you know in advance.</span></span></div>
+      </article>
     </div>
   </div>
 </section>
@@ -712,6 +763,7 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
       <p><span lang="tr">Copyright © <span data-year>2026</span> Tüm Hakları Şahin Karadaş'a Aittir.</span><span lang="en">Copyright © <span data-year>2026</span> All rights reserved by Şahin Karadaş.</span></p>
       <div class="ft-meta"><span><span lang="tr">Türkiye geneli · Uzaktan hizmet</span><span lang="en">All of Türkiye · Remote service</span></span><a href="mailto:destek@sahinkaradas.com">destek@sahinkaradas.com</a><span>© <span data-year>2026</span></span></div>
     </div>
+    <nav class="ft-legal" aria-label="Yasal metinler" data-aria-tr="Yasal metinler" data-aria-en="Legal"><a lang="tr" href="/kvkk/">KVKK Aydınlatma Metni</a><a lang="en" href="/en/privacy/">Privacy Notice</a><a lang="tr" href="/cerez-politikasi/">Çerez Politikası</a><a lang="en" href="/en/cookies/">Cookie Policy</a><button type="button" class="ft-ck" data-act="cookies"><span lang="tr">Çerez ayarları</span><span lang="en">Cookie settings</span></button></nav>
     <div class="ft-bot">
       <div><p style="font-size:15px;line-height:1.65"><strong>NOT FACEBOOK:</strong> This site is not a part of the Facebook website or Facebook Inc. Additionally, This site is NOT endorsed by Facebook in any way. FACEBOOK is a trademark of FACEBOOK, Inc.</p></div>
       <div><p style="margin-bottom:14px;text-align:center;font-size:16px;font-weight:800"><span lang="tr">Şahin Karadaş'tan Uyarı!</span><span lang="en">A note from Şahin Karadaş</span></p><p style="font-size:13.5px;line-height:1.75;text-wrap:pretty"><span lang="tr">Hızlı ve kolay sonuç vaatlerine inanmıyoruz. Emek vermeye, salonunuzun sorununu doğru anlayıp çözüm üretmeye ve işinize gerçek değer katmaya inanıyoruz. Sunduğumuz hizmetlerde size bu anlayışla yardımcı olmaya çalışıyoruz. Her salonun müşteri kitlesi, bulunduğu şehir, fiyatları ve çalışma düzeni farklıdır. Sosyal medyada paylaştığımız örnekler ve sonuçlar, düzenli çalışmanın ve gelen her müşteriyle ilgilenmenin eseridir. Bu yüzden kimseye belirli sayıda müşteri, randevu, kazanç ya da başarı garantisi vermiyoruz. Sonuç; reklam bütçesi, hizmet kalitesi, fiyatlar, gelen mesajlarla ilgilenme hızı ve düzenli takip gibi birçok etkene bağlıdır. Siz de bu anlayışı paylaşıyorsanız hadi başlayalım. Sorularınız için <a href="mailto:destek@sahinkaradas.com" style="font-weight:700;text-underline-offset:4px">destek@sahinkaradas.com</a> adresine e-posta gönderebilirsiniz.</span><span lang="en">We don't believe in quick, easy results. We believe in hard work, understanding your salon's real problem, finding a solution and adding real value to your business. That is how we try to help you with our services. Every salon has its own clients, city, prices and way of working. The examples and results we share on social media come from steady work and looking after every client who gets in touch. That is why we don't guarantee anyone a set number of clients, bookings, income or success. Results depend on many things, such as ad budget, service quality, prices, how quickly messages are answered and regular follow-up. If you share this view, let's get started. For questions, email <a href="mailto:destek@sahinkaradas.com" style="font-weight:700;text-underline-offset:4px">destek@sahinkaradas.com</a>.</span></p></div>
@@ -1218,4 +1270,5 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
   reset();
 })();
 </script>
+<script src="/assets/cerez.js" data-root="/" data-kind="site" defer></script>
 </body></html>
