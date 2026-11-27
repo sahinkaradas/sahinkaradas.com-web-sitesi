@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status*)",
+      "Bash(git diff*)",
+      "Bash(git log*)",
+      "Bash(ls *)",
+      "Bash(node --check *)",
+      "Bash(python blog/blog_build.py --check*)",
+      "Bash(npx serve*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ],
+    "ask": [
+      "Bash(npx -y serve*)",
+      "Bash(npx --yes serve*)",
+      "Bash(netlify *)",
+      "Bash(git push*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/sadece-hafiza.sh\"",
+            "onFailure": "block"
+          }
+        ]
+      }
+    ]
+  }
+}

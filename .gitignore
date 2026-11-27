@@ -1,0 +1,10 @@
+.env
+.env.*
+CLAUDE.local.md
+.claude/settings.local.json
+.claude/agent-memory-local/
+.netlify/
+# blog_build.py çıktıları (Netlify her yayında üretir)
+site/blog/
+site/sitemap.xml
+site/robots.txt

@@ -1,0 +1,13 @@
+# kalite-denetcisi hafızası
+
+Bu ajanın kendi notları: kararlar, tuzaklar, tekrar eden hatalar. Kodun kopyası, anahtar ve kişisel veri yazılmaz.
+
+## Öğrenilenler
+
+- 2026-11-27 (ilk denetim, ekip/kural dosyaları): Hook canlıda doğrulandı: proje köküne Write engellendi. Hafıza klasörüne yazma yolu bu kayıtla denendi.
+- Önce bak: AGENTS.md iddiaları (form yok, dosya haritası) gerçek dosyalarla. `site/index.html:534` demo sohbet formu (`dm-form`) var, ağ isteği yok; "form yok" ifadesi bu yüzden dikkatli okunmalı. Meta Pixel `site/assets/cerez.js` içinde (`fbq`), izne bağlı.
+- `blog_build.py --check` uyarı olsa da çıkış kodu 0 verir (satır 558); "uyarısız" kontrolü çıktıyı okumayı gerektirir. Yasal sayfaları ve shell.json-index.html eşitliğini denetlemez.
+- Blog yazıları yalnızca Türkçe; "her metin iki dilli" kuralı yalnızca ana sayfa/menü/altbilgi için geçerli. Yazı gövdesinde EN yok diye bulgu yazma.
+- `config.yml` `adres` alanı JSON'a yazılır ama slug dosya adından gelir (`blog_build.py:236`); REQ'deki `slug` her zaman dolu. Eşleşme tamam.
+- Sır taraması `.md` hariç: temiz çıktı (2026-11-27).
+- Panel (`site/yonetim/index.html:11`) Decap CMS'i unpkg CDN'den yüklüyor; AGENTS "CDN ekleme" kuralının önceden var olan istisnası.
