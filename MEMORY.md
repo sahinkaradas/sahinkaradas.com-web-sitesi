@@ -11,6 +11,8 @@ Yazma kuralları:
 
 ## Kararlar
 
+- 2026-11-27: `.gitattributes` eklendi (`*.sh text eol=lf`) / Windows'ta CRLF'e çevrilen `sadece-hafiza.sh` bozulur, hook çökerse engelleme garantisi yok, denetçi kilidi sessizce kapanır. Doğrulandı: dizinde ve çalışma klasöründe LF.
+- 2026-11-27: Ekip dosyaları commit `a4cf371` ile GitHub'a yüklendi; commit'ler `[skip ci]` ile atılır (Netlify yayın hakkı harcanmasın) ve bu repoda git kimliği GitHub gizli adresiyle ayarlı / yazar e-postası herkese açık görünür, gerçek adres açılmasın.
 - 2026-11-27: Denetçi bulguları uygulandı: blog gövdeleri tek dilli istisnası, `--check` çıktısını okuma notu, Meta Pixel ve demo formun açık yazılması, `npx -y/--yes serve` onaya alındı, `.gitignore` düzeltildi, CLAUDE.md onay listesi tamamlandı / denetçi raporu, kullanıcı 1-7 maddelerini onayladı.
 - 2026-11-27: "Form eklenirse" için AGENTS.md'ye 5 maddelik not eklendi / sitede şu an veri toplayan form yok, ileride kural sıfırdan yazılmasın.
 - 2026-11-27: `backend-uzmani` görevi blog üretimi, yazı paneli ve yayın akışına çevrildi; araçları Read, Write, Edit, Glob, Grep, Bash ile kısıtlandı / Supabase, Meta, Resend vb. bağlayıcılara erişmesin.
@@ -21,7 +23,8 @@ Yazma kuralları:
 ## Kullanıcı tercihleri
 
 - Küçük işte ajan kurulmaz ("hızlı düzelt" = doğrudan yap); 3'ten fazla dosya, sistem değişikliği ya da müşteri verisi varsa önce plan.
-- GitHub'a yüklemeyi kullanıcı kendisi yapar; "yayına hazırla" denince yalnızca dosya listesi verilir.
+- Commit'i Claude hazırlar, mesajı ve dosya listesini önce gösterir, onay sonrası commit'ler; `git push`'u kullanıcı kendisi çalıştırır (`! git push origin main`). Claude'un terminalinde GitHub oturumu yoktur, push orada çalışmaz.
+- "yayına hazırla" denince yalnızca değişen dosyaların listesi verilir.
 
 ## Açık işler
 
@@ -42,7 +45,9 @@ Yazma kuralları:
 - [ ] Yerel önizleme yöntemi belirsiz (AGENTS.md'de "doğrulanmadı"); `npx serve` ile denenecek, Node kurulu.
 - [ ] `backend-uzmani` Bash'i serbest; komut sınırı yalnızca `settings.json` izinlerinde.
 - [x] Yeni ekip dosyaları `kalite-denetcisi` ile denetlendi (2026-11-27): engelleyici yok, aşağıdaki "Sonra" maddeleri çıktı.
-- [ ] Bu dosyaların hiçbiri commit'lenmedi ya da GitHub'a yüklenmedi.
+- [x] Ekip dosyaları GitHub'a yüklendi (`a4cf371`, 2026-11-27).
+- [ ] `.gitattributes` commit'i (`988b11f`) yerelde hazır; push'u kullanıcı çalıştıracak. Yüklendiği doğrulanınca bu satırı `[x]` yap.
+- [ ] `[skip ci]` Netlify'da gerçekten çalıştı mı? Belgede var, denenmedi: Netlify Deploys sayfasında `a4cf371` ve `988b11f` için yeni yayın görünmemeli. Görünürse yayın hakkı harcanmış demektir.
 - [ ] `site/index.html` içinde mevcut satır içi `style=""` var; toplu temizlik istenmedi, yalnızca yenisi eklenmez.
 
 ## Tuzaklar
@@ -53,4 +58,6 @@ Yazma kuralları:
 - `python blog/blog_build.py --site site` komutu `site/` içine dosya yazar; üretilen dosyaları commit'e ekleme. `--check` dosya yazmaz.
 - Panel alanları (`site/yonetim/config.yml`) ile `blog_build.py`'nin beklediği alanlar eşleşmeli; birini değiştiren ikisini günceller.
 - Yazının adresi (dosya adı) yayınlandıktan sonra değişmez, bağlantılar bozulur.
-- Site iki dilli: her yeni metin hem `lang="tr"` hem `lang="en"` yazılır.
+- Ana sayfa, menü ve altbilgi iki dilli: her yeni metin hem `lang="tr"` hem `lang="en"` yazılır. Blog yazı gövdeleri yalnızca Türkçedir (istisna).
+- `[skip ci]` commit mesajının ilk satırında olmalı. Etiketsiz bir sonraki commit yayın tetikler ve atlanan değişiklikleri de içerir. `/yonetim/` panelinin commit'lerinde etiket yoktur, onlar yayın hakkı harcar.
+- `.sh` dosyaları LF kalmalı (`.gitattributes`); bir editör ya da Git ayarı CRLF yaparsa hook bozulur.
