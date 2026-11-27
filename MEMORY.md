@@ -46,8 +46,8 @@ Yazma kuralları:
 - [ ] `backend-uzmani` Bash'i serbest; komut sınırı yalnızca `settings.json` izinlerinde.
 - [x] Yeni ekip dosyaları `kalite-denetcisi` ile denetlendi (2026-11-27): engelleyici yok, aşağıdaki "Sonra" maddeleri çıktı.
 - [x] Ekip dosyaları GitHub'a yüklendi (`a4cf371`, 2026-11-27).
-- [ ] `.gitattributes` commit'i (`988b11f`) yerelde hazır; push'u kullanıcı çalıştıracak. Yüklendiği doğrulanınca bu satırı `[x]` yap.
-- [ ] `[skip ci]` Netlify'da gerçekten çalıştı mı? Belgede var, denenmedi: Netlify Deploys sayfasında `a4cf371` ve `988b11f` için yeni yayın görünmemeli. Görünürse yayın hakkı harcanmış demektir.
+- [x] `.gitattributes` commit'i (`988b11f`) ve `MEMORY.md` commit'i (`2a729c4`) GitHub'a yüklendi (2026-11-27); yerel ile uzak `main` aynı noktada.
+- [x] `[skip ci]` Netlify'da çalıştı (2026-11-27): kullanıcı Deploys sayfasında `a4cf371`, `988b11f` ve `2a729c4` için yeni yayın görmedi. Yayın hakkı harcanmadı.
 - [ ] `site/index.html` içinde mevcut satır içi `style=""` var; toplu temizlik istenmedi, yalnızca yenisi eklenmez.
 
 ## Tuzaklar
