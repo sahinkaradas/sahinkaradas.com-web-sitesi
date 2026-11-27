@@ -11,6 +11,8 @@ Yazma kuralları:
 
 ## Kararlar
 
+- 2026-11-27: Denetimden 3 madde daha yapıldı, ilk 4 maddeyle birlikte tek commit/yayın olarak bekliyor: `site/favicon.ico` (apple-touch-icon.png'den ICO kutusu, tek boyut 180x180), ana sayfa JSON-LD (Person + ProfessionalService, `sameAs` yalnızca Instagram, bilerek telefon yok) ve logo `aria-label` (görünen yazı başa alındı; `index.html` üç öznitelik + `shell.json`) / Lighthouse `label-content-name-mismatch` ve 404; kullanıcı her maddeyi tek tek onayladı.
+- 2026-11-27: Site denetimi (tam mod) sonrası 4 madde yapıldı, commit/yayın bekliyor: ana sayfa başlığı (`index.html:2` ve `TXT.title`), `og:image` (mevcut 720x720 portre, seçenek A), footer (tek telif satırı, uyarı paragrafı "ben" ağzıyla, başlık "Size söz vermediklerim"; NOT FACEBOOK paragrafı bilerek bırakıldı) ve `netlify.toml` `/*` güvenlik başlıkları (`X-Frame-Options=SAMEORIGIN`, CSP bilerek yok) / kullanıcı her maddeyi tek tek onayladı; rapor `site-denetim-raporlari/` altında (git'e girmez), denetçi engelleyici bulmadı.
 - 2026-11-27: `.gitattributes` eklendi (`*.sh text eol=lf`) / Windows'ta CRLF'e çevrilen `sadece-hafiza.sh` bozulur, hook çökerse engelleme garantisi yok, denetçi kilidi sessizce kapanır. Doğrulandı: dizinde ve çalışma klasöründe LF.
 - 2026-11-27: Ekip dosyaları commit `a4cf371` ile GitHub'a yüklendi; commit'ler `[skip ci]` ile atılır (Netlify yayın hakkı harcanmasın) ve bu repoda git kimliği GitHub gizli adresiyle ayarlı / yazar e-postası herkese açık görünür, gerçek adres açılmasın.
 - 2026-11-27: Denetçi bulguları uygulandı: blog gövdeleri tek dilli istisnası, `--check` çıktısını okuma notu, Meta Pixel ve demo formun açık yazılması, `npx -y/--yes serve` onaya alındı, `.gitignore` düzeltildi, CLAUDE.md onay listesi tamamlandı / denetçi raporu, kullanıcı 1-7 maddelerini onayladı.
@@ -28,6 +30,12 @@ Yazma kuralları:
 
 ## Açık işler
 
+- [ ] Mobil hız: Lighthouse mobil 68, Total Blocking Time 1.670 ms (1.161 öğe, TR+EN metin iki kez DOM'da). Kullanıcı "ayrı ele alacağız" dedi; ilk adım `content-visibility:auto`, sonra Lighthouse tekrar.
+- [ ] Tarayıcı testleri yapılmadı: `/yonetim/` önizleme ve girişi (yeni `X-Frame-Options` sonrası), EN sekme başlığı (`sk-lang=en`), WhatsApp/Facebook paylaşım önizlemesi, `/favicon.ico` açılıyor mu ve `image/x-icon` mu, Google Zengin Sonuç Testi (JSON-LD), EN düğmesinde logo `aria-label`, Lighthouse `label-content-name-mismatch` kalktı mı.
+- [ ] Commit'e girecek yeni dosya: `site/favicon.ico` (şu an izlenmiyor, `git add` gerekir). Instagram adresi (`sahinkaradascom`) yalnızca JSON-LD'de geçiyor; kullanıcı hesabın doğru ve herkese açık olduğunu teyit edecek. Blog JSON-LD'sinde Person `@id` yok (`blog_build.py:376-377, 421`), ana sayfadaki `#sahin` ile bağlanmıyor; sonraki blog işinde eklenebilir.
+- [ ] `og:image` B seçeneği: Canva'da 1200x630 görsel (marka renkleri + portre); blog sayfalarında `og:image` yok (`blog_build.py:341`); `og:image:alt` yok.
+- [ ] Güvenlik: CSP önce `Report-Only` denenecek; `/yonetim/` unpkg betiğine `integrity` ya da yerel kopya; GitHub hesabında iki adımlı doğrulama kullanıcı tarafından kontrol edilecek.
+- [ ] Denetim raporundaki kalan "Sonra" maddeleri (`site-denetim-raporlari/sahinkaradas.com-2026-11-27/RAPOR.md`): ana sayfa JSON-LD, `favicon.ico` 404, logo `aria-label`, hero portre, `.eye` etiketleri/eş kartlar, font-gölge-yuvarlaklık sadeleştirme.
 - [x] Hook gerçek ortamda denendi (2026-11-27): `kalite-denetcisi` proje köküne yazamadı, `.hook-test.tmp` oluşmadı; kendi hafıza klasörüne yazabildi.
 - [x] AGENTS.md'ye "blog yazı gövdeleri yalnızca Türkçe" istisnası: "her metin iki dilli" kuralı blog yazılarıyla çelişiyor, denetçi her yazıyı işaretler.
 - [x] `blog_build.py --check` uyarı verse de çıkış kodu 0 (`blog_build.py:559`); AGENTS.md'ye "çıktıdaki UYARI satırlarını oku" notu. `--check` yasal sayfaları ve index.html/shell.json eşitliğini denetlemez.

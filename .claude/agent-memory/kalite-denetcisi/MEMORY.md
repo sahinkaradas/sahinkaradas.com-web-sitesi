@@ -10,4 +10,7 @@ Bu ajanın kendi notları: kararlar, tuzaklar, tekrar eden hatalar. Kodun kopyas
 - Blog yazıları yalnızca Türkçe; "her metin iki dilli" kuralı yalnızca ana sayfa/menü/altbilgi için geçerli. Yazı gövdesinde EN yok diye bulgu yazma.
 - `config.yml` `adres` alanı JSON'a yazılır ama slug dosya adından gelir (`blog_build.py:236`); REQ'deki `slug` her zaman dolu. Eşleşme tamam.
 - Sır taraması `.md` hariç: temiz çıktı (2026-11-27).
+- Büyük dosya okuma: `site/index.html` satır 22-23 base64 font, satır 489/781 çok uzun; Read yerine Grep `-o` ile kısa desen kullan. Ham metin Read'i 60K token yer.
+- JSON-LD ve "sitede zaten açık" iddiaları: kullanıcının "açık" dediği bilgiyi (e-posta, Instagram) Grep ile görünür metinde doğrula; Instagram adresi yalnızca JSON-LD'de çıktı (2026-11-27).
+- `a.logo` aria-label: görünen yazı `.wm-sub` içinde TR+EN span; blog shell'de iki span de var ama blog tek dilli.
 - Panel (`site/yonetim/index.html:11`) Decap CMS'i unpkg CDN'den yüklüyor; AGENTS "CDN ekleme" kuralının önceden var olan istisnası.
