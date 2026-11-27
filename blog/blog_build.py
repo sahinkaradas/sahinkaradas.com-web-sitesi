@@ -322,6 +322,12 @@ def foot(shell, P):
     return pages(shell["footer"], P) + "\n" + consent(P)
 
 
+def og_image(shell):
+    """Blog listesi ve yazıları için paylaşım görseli (ana sayfadakiyle aynı portre)."""
+    return (f'<meta property="og:image" content="{shell["site"]}/sahin-karadas.jpg">\n'
+            '<meta property="og:image:width" content="720">\n<meta property="og:image:height" content="720">')
+
+
 def head(shell, P, title, desc, url, extra, ld, lang="tr"):
     icon = P.asset("apple-touch-icon.png")
     battr = ' data-lang="en"' if lang == "en" else ""
@@ -380,7 +386,8 @@ def post_page(shell, posts, p, kind):
             {"@type": "ListItem", "position": 2, "name": "Blog", "item": shell["site"] + "/blog/"},
             {"@type": "ListItem", "position": 3, "name": p["title"], "item": url}]}]}
     extra = (f'<meta property="og:type" content="article">\n<meta property="og:title" content="{e(p["title"])}">\n'
-             f'<meta property="article:published_time" content="{p["date"]}">\n<meta property="article:modified_time" content="{upd}">')
+             f'<meta property="article:published_time" content="{p["date"]}">\n<meta property="article:modified_time" content="{upd}">\n'
+             + og_image(shell))
     others = [o for o in posts if o["slug"] != p["slug"]][:3]
     more = ""
     if others:
@@ -421,7 +428,7 @@ def list_page(shell, posts, kind):
           "author": {"@type": "Person", "name": "Şahin Karadaş", "url": shell["site"] + "/"},
           "blogPost": [{"@type": "BlogPosting", "headline": p["title"], "url": f"{shell['site']}/blog/{p['slug']}/",
                         "datePublished": p["date"]} for p in posts]}
-    extra = '<meta property="og:type" content="website">\n<meta property="og:title" content="Blog | Şahin Karadaş">'
+    extra = '<meta property="og:type" content="website">\n<meta property="og:title" content="Blog | Şahin Karadaş">\n' + og_image(shell)
     cards = "".join(f"""
 <li class="b-card">
 <p class="post-meta"><time datetime="{p['date']}">{tarih(p['date'])}</time><span class="dot" aria-hidden="true"></span><span>{p['category']}</span><span class="dot" aria-hidden="true"></span><span>{p['min']} dk okuma</span></p>

@@ -376,7 +376,7 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
 
 /* demo sekmeleri: Paket 1 / Paket 2 */
 .dm-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:0 0 12px;padding:4px;background:var(--card);border:1px solid var(--line);border-radius:16px}
-.dm-tab{position:relative;display:grid;align-content:center;justify-items:center;gap:1px;min-height:50px;padding:6px 8px;border:0;border-radius:12px;background:transparent;color:var(--ink);font:800 14px/1.25 var(--f);text-align:center;cursor:pointer}
+.dm-tab{position:relative;display:grid;align-content:center;justify-items:center;gap:1px;min-height:50px;padding:6px 8px;border:0;border-radius:var(--r-s);background:transparent;color:var(--ink);font:800 14px/1.25 var(--f);text-align:center;cursor:pointer}
 .dm-tab small{font-size:12px;font-weight:700;color:var(--muted)}
 .dm-tab:hover{background:var(--plum-soft)}
 .dm-tab[aria-pressed="true"]{background:var(--plum);color:var(--on-plum);cursor:default}
@@ -388,7 +388,7 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
 .dcard .tryp2{min-height:44px;padding:0 12px;border:0;border-radius:999px;background:var(--plum);color:#fff;font:700 13.5px var(--f);cursor:pointer}
 .dcard .tryp2:hover{background:#2B2925}
 .dcard.nudge{border-color:#F5C431;background:#FFFBEA}
-.p2note{display:flex;gap:10px;align-items:flex-start;margin:0;font-size:14.5px;line-height:1.5;color:var(--ink);background:var(--gold-soft);border-radius:12px;padding:10px 12px}
+.p2note{display:flex;gap:10px;align-items:flex-start;margin:0;font-size:14.5px;line-height:1.5;color:var(--ink);background:var(--gold-soft);border-radius:var(--r-s);padding:10px 12px}
 .p2tag{flex:none;margin-top:1px;font-size:12px;font-weight:800;letter-spacing:.02em;line-height:1.6;padding:1px 8px;border-radius:999px;background:#F5C431;color:#151412}
 @media (prefers-reduced-motion:reduce){.dm-new{animation:none}}
 /* düğmeler: fare üstüne gelince yükselir ve gölgelenir, basınca hafifçe öne çıkar */
@@ -491,7 +491,7 @@ html.ck-on .mbar,html.ck-on .fab{visibility:hidden}
 .prose a{color:var(--ink);text-decoration-color:#F5C431;text-decoration-thickness:2px;text-underline-offset:3px}
 .prose a:hover{text-decoration-color:currentColor}
 .prose .note{padding:16px 18px;border-radius:14px;background:var(--gold-soft);font-size:17px;line-height:1.65}
-.prose .ex{display:grid;gap:8px;padding:16px;border-radius:18px;background:var(--blush);border:1px solid var(--line)}
+.prose .ex{display:grid;gap:8px;padding:16px;border-radius:var(--r-m);background:var(--blush);border:1px solid var(--line)}
 .prose .ex p{max-width:85%;margin:0;padding:9px 13px;border-radius:14px;font-size:16px;line-height:1.5}
 .prose .ex .in{justify-self:start;background:var(--card);border:1px solid var(--line);border-bottom-left-radius:4px}
 .prose .ex .out{justify-self:end;background:#F5C431;color:#151412;border-bottom-right-radius:4px}

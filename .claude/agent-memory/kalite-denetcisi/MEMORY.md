@@ -14,3 +14,7 @@ Bu ajanın kendi notları: kararlar, tuzaklar, tekrar eden hatalar. Kodun kopyas
 - JSON-LD ve "sitede zaten açık" iddiaları: kullanıcının "açık" dediği bilgiyi (e-posta, Instagram) Grep ile görünür metinde doğrula; Instagram adresi yalnızca JSON-LD'de çıktı (2026-11-27).
 - `a.logo` aria-label: görünen yazı `.wm-sub` içinde TR+EN span; blog shell'de iki span de var ama blog tek dilli.
 - Panel (`site/yonetim/index.html:11`) Decap CMS'i unpkg CDN'den yüklüyor; AGENTS "CDN ekleme" kuralının önceden var olan istisnası.
+- CSS ayrışması: `index.html` kendi satır içi CSS'ini taşır, `site.css` yalnızca blog/yasal. Blog `.pcard/.cards3/.steps/.step/.need/.hero-by` sınıflarını kullanmıyor (Grep sayısı 0, 2026-11-27); bu sınıflar index'te değişince site.css'e taşıma gerekmez, ölü kod kalır. Ortak olanlar: `.eye`, `--r-s/--r-m` değişkenleri, `.prose .ex`.
+- CRLF kontrolü: Grep `[^\r]\n` multiline ile çıplak LF aranır; 2026-11-27'de üç dosyada 0 çıktı.
+- Grep'te `-P` parametresi yok; çok satırlı arama `multiline:true` ile.
+- Boş bırakılmış `@media (max-width:1020px){}` index.html:282 (kalıntı, zararsız).

@@ -105,6 +105,10 @@ h1,h2,h3{text-wrap:balance;letter-spacing:-.025em;color:var(--ink)}
 .cta-row .btn{flex:1 1 220px;max-width:300px}
 .trust{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 20px;font-size:15px;font-weight:600}
 .trust li{display:flex;align-items:center;gap:8px}
+.hero-by{display:flex;align-items:center;gap:12px;margin:0}
+.hero-by picture,.hero-by img{display:block;flex:none;width:48px;height:48px;border-radius:50%;object-fit:cover;background:var(--line)}
+.hero-by > span{min-width:0;font-size:14px;line-height:1.4;color:var(--muted)}
+.hero-by b{display:block;font-size:15.5px;color:var(--ink)}
 
 /* phone demo */
 .phone{margin:0;justify-self:center;width:100%;max-width:340px}
@@ -124,8 +128,13 @@ h1,h2,h3{text-wrap:balance;letter-spacing:-.025em;color:var(--ink)}
 
 /* problems */
 .cards3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (min-width:861px){
+  #dertler .cards3{grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+  #dertler .pcard:first-child{grid-row:span 2;padding:40px}
+  #dertler .pcard:first-child h3{font-size:32px}
+  #dertler .pcard:first-child p{font-size:19px}
+}
 .pcard{display:flex;flex-direction:column;gap:10px;background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:clamp(22px,2.6vw,30px)}
-.pcard .ic{width:52px;height:52px;border-radius:14px;background:var(--plum-soft);color:var(--plum-ink);display:flex;align-items:center;justify-content:center}
 .pcard h3{font-size:20px;line-height:1.3;font-weight:800;margin-top:6px}
 .pcard p{font-size:16px;color:var(--muted);text-wrap:pretty}
 .pcard .sol{margin-top:auto;display:flex;gap:10px;align-items:flex-start;padding-top:14px;border-top:1px dashed var(--line);font-size:15.5px;font-weight:700;line-height:1.45}
@@ -171,17 +180,25 @@ h1,h2,h3{text-wrap:balance;letter-spacing:-.025em;color:var(--ink)}
 .calc .fine{font-size:14px;line-height:1.55;color:var(--on-night-2)}
 
 /* process */
-.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;counter-reset:st}
-.step{background:var(--card);border:1px solid var(--line);border-radius:var(--r-m);padding:22px;display:grid;gap:8px;align-content:start}
-.step .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
-.step .n{width:40px;height:40px;border-radius:50%;background:var(--plum);color:var(--on-plum);display:flex;align-items:center;justify-content:center;font-weight:800}
-.step .t{font-size:13px;font-weight:700;color:var(--plum-ink);background:var(--plum-soft);border-radius:999px;padding:4px 10px;text-align:center}
-.step h3{font-size:18.5px;line-height:1.3;font-weight:800;margin-top:6px}
-.step p{font-size:15.5px;color:var(--muted);line-height:1.55}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:0;counter-reset:st}
+.step{position:relative;display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:18px;row-gap:4px;padding:0 0 28px;align-content:start}
+.step:last-child{padding-bottom:0}
+.step::before{content:"";position:absolute;left:19px;top:44px;bottom:4px;width:2px;background:var(--line)}
+.step:last-child::before{display:none}
+.step .top{display:contents}
+.step .n{width:40px;height:40px;border-radius:50%;background:var(--plum);color:var(--on-plum);display:flex;align-items:center;justify-content:center;font-weight:800;grid-row:span 3}
+.step .t{font-size:13px;font-weight:700;color:var(--plum-ink);background:var(--plum-soft);border-radius:999px;padding:4px 10px;text-align:center;justify-self:start;grid-column:2}
+.step h3{grid-column:2;font-size:18.5px;line-height:1.3;font-weight:800;margin-top:2px}
+.step p{grid-column:2;font-size:15.5px;color:var(--muted);line-height:1.55}
 .need{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;border:1px dashed var(--line);border-radius:var(--r-m);padding:18px 22px;background:var(--card)}
 .need b{font-size:16px}
 .need ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .need li{font-size:14.5px;font-weight:600;padding:6px 12px;border-radius:999px;background:var(--blush)}
+@media (min-width:861px){
+  #surec .wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);column-gap:clamp(32px,5vw,72px);align-items:start}
+  #surec .head{grid-column:1/-1}
+  #surec .need{margin-top:0;flex-direction:column;align-items:flex-start;position:sticky;top:96px}
+}
 
 /* packages */
 .pk-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;align-items:stretch}
@@ -262,9 +279,6 @@ h1,h2,h3{text-wrap:balance;letter-spacing:-.025em;color:var(--ink)}
 
 /* responsive */
 @media (min-width:861px){.fab{display:flex}}
-@media (max-width:1020px){
-  .steps{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
 @media (max-width:860px){
   .hero-grid,.calc-grid,.c-grid,.faq-grid,.about,.together{grid-template-columns:minmax(0,1fr)}
   .cards3,.srv,.pk-notes,.pk-grid{grid-template-columns:minmax(0,1fr)}
@@ -286,12 +300,10 @@ h1,h2,h3{text-wrap:balance;letter-spacing:-.025em;color:var(--ink)}
   .phone{max-width:300px}
   .bub{font-size:13.5px}
   .cards3{gap:12px}
-  .pcard{display:grid;grid-template-columns:44px minmax(0,1fr);column-gap:14px;row-gap:6px;padding:18px}
-  .pcard .ic{width:44px;height:44px;border-radius:12px;grid-row:span 2}
-  .pcard .ic svg{width:22px;height:22px}
-  .pcard h3{font-size:18px;margin-top:0;align-self:center}
-  .pcard p{font-size:15.5px;grid-column:2}
-  .pcard .sol{grid-column:1/-1;font-size:15px;padding-top:12px;margin-top:4px}
+  .pcard{padding:18px}
+  .pcard h3{font-size:18px;margin-top:0}
+  .pcard p{font-size:15.5px}
+  .pcard .sol{font-size:15px;padding-top:12px;margin-top:4px}
   .pipe li{padding:12px 12px 14px}
   .pipe .d{display:none}
   .pipe b{font-size:15px}
@@ -299,13 +311,9 @@ h1,h2,h3{text-wrap:balance;letter-spacing:-.025em;color:var(--ink)}
   .scard{padding:22px;gap:12px}
   .scard .list,.pk .list{font-size:15.5px;gap:10px}
   .together{padding:22px;margin-top:14px}
-  .steps{grid-template-columns:minmax(0,1fr);gap:10px}
-  .step{grid-template-columns:40px minmax(0,1fr);column-gap:14px;row-gap:4px;padding:16px 18px}
-  .step .top{display:contents}
-  .step .n{grid-row:span 3}
-  .step .t{justify-self:start;grid-column:2}
-  .step h3{grid-column:2;margin-top:2px;font-size:17px}
-  .step p{grid-column:2;font-size:15px}
+  .step{column-gap:14px;padding-bottom:22px}
+  .step h3{font-size:17px}
+  .step p{font-size:15px}
   .need{padding:16px 18px}
   .pk{padding:22px}
   .pk .price{margin-top:14px}
@@ -397,7 +405,7 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
 
 /* demo sekmeleri: Paket 1 / Paket 2 */
 .dm-tabs{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:0 0 12px;padding:4px;background:var(--card);border:1px solid var(--line);border-radius:16px}
-.dm-tab{position:relative;display:grid;align-content:center;justify-items:center;gap:1px;min-height:50px;padding:6px 8px;border:0;border-radius:12px;background:transparent;color:var(--ink);font:800 14px/1.25 var(--f);text-align:center;cursor:pointer}
+.dm-tab{position:relative;display:grid;align-content:center;justify-items:center;gap:1px;min-height:50px;padding:6px 8px;border:0;border-radius:var(--r-s);background:transparent;color:var(--ink);font:800 14px/1.25 var(--f);text-align:center;cursor:pointer}
 .dm-tab small{font-size:12px;font-weight:700;color:var(--muted)}
 .dm-tab:hover{background:var(--plum-soft)}
 .dm-tab[aria-pressed="true"]{background:var(--plum);color:var(--on-plum);cursor:default}
@@ -409,7 +417,7 @@ html[data-eff="dark"] [data-th="lt"],html:not([data-eff="dark"]) [data-th="dk"]{
 .dcard .tryp2{min-height:44px;padding:0 12px;border:0;border-radius:999px;background:var(--plum);color:#fff;font:700 13.5px var(--f);cursor:pointer}
 .dcard .tryp2:hover{background:#2B2925}
 .dcard.nudge{border-color:#F5C431;background:#FFFBEA}
-.p2note{display:flex;gap:10px;align-items:flex-start;margin:0;font-size:14.5px;line-height:1.5;color:var(--ink);background:var(--gold-soft);border-radius:12px;padding:10px 12px}
+.p2note{display:flex;gap:10px;align-items:flex-start;margin:0;font-size:14.5px;line-height:1.5;color:var(--ink);background:var(--gold-soft);border-radius:var(--r-s);padding:10px 12px}
 .p2tag{flex:none;margin-top:1px;font-size:12px;font-weight:800;letter-spacing:.02em;line-height:1.6;padding:1px 8px;border-radius:999px;background:#F5C431;color:#151412}
 @media (prefers-reduced-motion:reduce){.dm-new{animation:none}}
 /* düğmeler: fare üstüne gelince yükselir ve gölgelenir, basınca hafifçe öne çıkar */
@@ -523,6 +531,7 @@ html.ck-on .mbar,html.ck-on .fab{visibility:hidden}
         <a class="btn btn-wa " href="https://wa.me/905458070768?text=Merhaba%20%C5%9Eahin%20Bey%2C%20salonum%20i%C3%A7in%20bilgi%20almak%20istiyorum." data-wa-tr="https://wa.me/905458070768?text=Merhaba%20%C5%9Eahin%20Bey%2C%20salonum%20i%C3%A7in%20bilgi%20almak%20istiyorum." data-wa-en="https://wa.me/905458070768?text=Hello%20%C5%9Eahin%2C%20I%27d%20like%20to%20get%20information%20for%20my%20salon." target="_blank" rel="noopener" ><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg><span><span lang="tr">WhatsApp'tan yazın</span><span lang="en">Message on WhatsApp</span></span></a>
         <a class="btn btn-ol" href="#hizmetler"><span lang="tr">Hizmetleri görün</span><span lang="en">See services</span></a>
       </div>
+      <p class="hero-by"><picture><source srcset="sahin-karadas.webp" type="image/webp"><img src="sahin-karadas.jpg" alt="" width="48" height="48" decoding="async"></picture><span><b>Şahin Karadaş</b><span lang="tr">Meta reklamları ve mesaj asistanı · 2020'den beri</span><span lang="en">Meta ads and message assistant · since 2020</span></span></p>
       <ul class="trust">
         <li><span class="tick soft" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span lang="tr">Şifrenizi istemem</span><span lang="en">I never ask for your password</span></li><li><span class="tick soft" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span lang="tr">Hesaplar sizin adınıza</span><span lang="en">Accounts stay in your name</span></li><li><span class="tick soft" aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span lang="tr">İlk ay memnun kalmazsanız aylık ücret yok</span><span lang="en">Not happy in the first month? No monthly fee</span></li>
       </ul>
@@ -556,7 +565,6 @@ html.ck-on .mbar,html.ck-on .fab{visibility:hidden}
 <section class="band" id="hizmetler" aria-labelledby="h-hiz">
   <div class="wrap">
     <div class="head">
-      <p><span class="eye"><span lang="tr">Hizmetler</span><span lang="en">Services</span></span></p>
       <h2 class="h2" id="h-hiz"><span lang="tr">Müşteriyi reklamla ben getiriyorum, asistan da kaçırmıyor.</span><span lang="en">I bring in clients with ads, and the assistant makes sure none slip away.</span></h2>
       <p class="lead"><span lang="tr">Reklam yönetimi yeni müşteriyi getirir. Mesaj asistanı o müşteriyi karşılar ve randevuya yönlendirir. İkisini ayrı ayrı da alabilirsiniz, birlikte de.</span><span lang="en">Ad management brings new clients. The message assistant welcomes them and guides them to a booking. You can take them separately or together.</span></p>
     </div>
@@ -604,19 +612,16 @@ html.ck-on .mbar,html.ck-on .fab{visibility:hidden}
     </div>
     <div class="cards3">
       <article class="pcard">
-        <span class="ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M12.5 8v4l2.5 1.5"/></svg></span>
-        <h3><span lang="tr">Koltukta müşteri varken telefona bakamıyorsunuz</span><span lang="en">You can't check your phone while a client is in the chair</span></h3>
-        <p><span lang="tr">“Keratin ne kadar?” mesajına 2 saat sonra dönüyorsunuz. Müşteri o arada başka salondan randevusunu almış oluyor.</span><span lang="en">You reply to “How much is keratin?” two hours later. By then the client has already booked at another salon.</span></p>
-        <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Asistan 1 dakika içinde fiyatı ve boş saatleri yazar.</span><span lang="en">The assistant sends the price and free slots within 1 minute.</span></span></div>
-      </article>
-      <article class="pcard">
-        <span class="ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg></span>
         <h3><span lang="tr">Mesai dışında gelen mesaj cevapsız kalıyor</span><span lang="en">Messages after hours go unanswered</span></h3>
         <p><span lang="tr">Birçok müşteri mesajını salon kapandıktan sonra, pazar günü ya da bayramda atıyor. Ertesi sabah telefonu açtığınızda o müşteri çoktan başka bir salondan randevusunu almış oluyor.</span><span lang="en">Many clients write after the salon has closed, on a Sunday or on a public holiday. By the time you check your phone the next morning, she has already booked at another salon.</span></p>
         <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Asistan mesai dışında da 1 dakikada cevap verir, randevuyu ertesi güne hazır bırakır.</span><span lang="en">The assistant replies within a minute after hours too and leaves the booking ready for the next day.</span></span></div>
       </article>
       <article class="pcard">
-        <span class="ic"><svg aria-hidden="true" focusable="false" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4M10 13.5l4 4M14 13.5l-4 4"/></svg></span>
+        <h3><span lang="tr">Koltukta müşteri varken telefona bakamıyorsunuz</span><span lang="en">You can't check your phone while a client is in the chair</span></h3>
+        <p><span lang="tr">“Keratin ne kadar?” mesajına 2 saat sonra dönüyorsunuz. Müşteri o arada başka salondan randevusunu almış oluyor.</span><span lang="en">You reply to “How much is keratin?” two hours later. By then the client has already booked at another salon.</span></p>
+        <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Asistan 1 dakika içinde fiyatı ve boş saatleri yazar.</span><span lang="en">The assistant sends the price and free slots within 1 minute.</span></span></div>
+      </article>
+      <article class="pcard">
         <h3><span lang="tr">Unutulan randevu, boş koltuk</span><span lang="en">A forgotten booking, an empty chair</span></h3>
         <p><span lang="tr">Protez tırnak, kirpik lifting, gelin başı… Randevusunu unutan müşteri gelmiyor, o saat boş geçiyor.</span><span lang="en">Acrylic nails, lash lift, bridal hair… A client who forgets her appointment doesn't come, and that hour goes empty.</span></p>
         <div class="sol"><span class="tick " aria-hidden="true"><svg aria-hidden="true" focusable="false" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span><span lang="tr">Randevu sabahı hatırlatma gider, gelemeyecekse önceden haber verir.</span><span lang="en">A reminder goes out on the morning of the visit; if she can't come, she lets you know in advance.</span></span></div>
@@ -669,7 +674,6 @@ html.ck-on .mbar,html.ck-on .fab{visibility:hidden}
 <section class="band blush" id="paketler" aria-labelledby="h-pk">
   <div class="wrap">
     <div class="head">
-      <p><span class="eye"><span lang="tr">Paketler</span><span lang="en">Packages</span></span></p>
       <h2 class="h2" id="h-pk"><span lang="tr">İki paket, net başlangıç fiyatı.</span><span lang="en">Two packages, clear starting prices.</span></h2>
       <p class="lead"><span lang="tr">Kurulum bir kez ödenir, sonrası aylık. Kesin fiyatı salonunuza gelen mesaj sayısına göre ön görüşmede söylüyorum.</span><span lang="en">Setup is paid once, then monthly. I give the exact price in the intro call, based on how many messages your salon gets.</span></p>
     </div>
@@ -729,7 +733,6 @@ html.ck-on .mbar,html.ck-on .fab{visibility:hidden}
 <section class="band blush" id="sss" aria-labelledby="h-sss">
   <div class="wrap faq-grid">
     <div class="head" style="margin-bottom:0">
-      <p><span class="eye"><span lang="tr">Sorular</span><span lang="en">Questions</span></span></p>
       <h2 class="h2" id="h-sss"><span lang="tr">En çok sorulanlar, net cevaplarıyla.</span><span lang="en">The most asked questions, with clear answers.</span></h2>
       <p class="lead"><span lang="tr">Sorunuz burada yoksa bir mesaj atın, kendim cevaplarım.</span><span lang="en">If your question isn't here, send me a message and I'll answer it myself.</span></p>
       <div><a class="btn btn-wa " href="https://wa.me/905458070768?text=Merhaba%20%C5%9Eahin%20Bey%2C%20sitenizde%20cevab%C4%B1n%C4%B1%20bulamad%C4%B1%C4%9F%C4%B1m%20bir%20sorum%20var." data-wa-tr="https://wa.me/905458070768?text=Merhaba%20%C5%9Eahin%20Bey%2C%20sitenizde%20cevab%C4%B1n%C4%B1%20bulamad%C4%B1%C4%9F%C4%B1m%20bir%20sorum%20var." data-wa-en="https://wa.me/905458070768?text=Hello%20%C5%9Eahin%2C%20I%20have%20a%20question%20I%20couldn%27t%20find%20on%20your%20site." target="_blank" rel="noopener" ><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg><span><span lang="tr">Sorunuzu WhatsApp'tan sorun</span><span lang="en">Ask your question on WhatsApp</span></span></a></div>
@@ -749,7 +752,6 @@ html.ck-on .mbar,html.ck-on .fab{visibility:hidden}
 <section class="band contact" id="iletisim" aria-labelledby="h-il">
   <div class="wrap c-grid">
     <div style="display:grid;gap:16px;min-width:0">
-      <p><span class="eye"><span lang="tr">İletişim</span><span lang="en">Contact</span></span></p>
       <h2 class="h2" id="h-il"><span lang="tr">Salonunuza gelen son 10 mesaja birlikte bakalım.</span><span lang="en">Let's look at the last 10 messages your salon received, together.</span></h2>
       <p class="lead"><span lang="tr">WhatsApp'tan yazın. 10 dakikada hangi mesajların kaçtığını, reklamınızın ne getirdiğini ve hangi paketin size uyduğunu konuşalım. Uymuyorsa açıkça söylerim.</span><span lang="en">Message me on WhatsApp. In 10 minutes we'll talk about which messages are being missed, what your ads bring and which package suits you. If it's not a fit, I'll tell you plainly.</span></p>
       <div class="cta-row" style="margin-top:10px">
